@@ -104,23 +104,42 @@ public class GlennisService extends Service {
     	}
     	
     	public void calculateSet() {
-    		String sets = "";
+    		switch(SET) {
+				case 0:
+					mScoreRenderer.setSet0(ME_SETS[0] + " - " + THEM_SETS[0]);
+				case 1:
+					mScoreRenderer.setSet1(ME_SETS[1] + " - " + THEM_SETS[1]);
+				case 2:
+					mScoreRenderer.setSet2(ME_SETS[2] + " - " + THEM_SETS[2]);
+			}
     		
-    		sets += ME_SETS[0] + " - " + THEM_SETS[0];
-    		sets += "\n";
-    		sets += ME_SETS[1] + " - " + THEM_SETS[1];
-    		sets += "\n";
-    		sets += ME_SETS[2] + " - " + THEM_SETS[2];
-    		
-    		if(ME_SETS[SET] >= 3 || THEM_SETS[SET] >= 3) {
+    		if(ME_SETS[SET] >= 6 || THEM_SETS[SET] >= 6) {
     			int difference = ME_SETS[SET] - THEM_SETS[SET];
     			
     			if(difference >= 2 || difference <= -2) {
+    				int winner;
+    				
     				if(difference >= 2) {
+    					winner = 0;
+    					
     					ME_MATCH++;
     				} else {
+    					winner = 1;
+    					
     					THEM_MATCH++;
     				}
+    				
+    	    		switch(SET) {
+    	    			case 0:
+    	    				mScoreRenderer.setSet0Winner(winner);
+    	    				break;
+    	    			case 1:
+    	    				mScoreRenderer.setSet1Winner(winner);
+    	    				break;
+    	    			case 2:
+    	    				mScoreRenderer.setSet2Winner(winner);
+    	    				break;
+    	    		}
     				
     				SET++;
     				
@@ -143,8 +162,6 @@ public class GlennisService extends Service {
     				}
     			}
     		}
-    		
-    		mScoreRenderer.setSets(sets);
     	}
     	
     	public void endGame() {
@@ -178,8 +195,6 @@ public class GlennisService extends Service {
     		
     		mScoreRenderer.setMeGame("0");
 			mScoreRenderer.setThemGame("0");
-			
-			showEndMenu();
     	}
     	
     	public void endAll() {

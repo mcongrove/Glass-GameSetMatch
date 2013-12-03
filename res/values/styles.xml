@@ -32,9 +32,17 @@
         <item name="android:textSize">150px</item>
     </style>
     
-    <style name="Sets">
+    <style name="SetContainer">
         <item name="android:layout_width">160px</item>
         <item name="android:layout_height">150px</item>
+        <item name="android:layout_marginTop">0px</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    
+    <style name="Sets">
+        <item name="android:layout_width">160px</item>
+        <item name="android:layout_height">50px</item>
         <item name="android:layout_marginTop">0px</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>

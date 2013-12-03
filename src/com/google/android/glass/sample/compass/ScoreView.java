@@ -17,6 +17,7 @@
 package com.google.android.glass.sample.compass;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
@@ -39,7 +40,9 @@ public class ScoreView extends FrameLayout {
 	
     private final TextView mMeGameView;
     private final TextView mThemGameView;
-    private final TextView mSetsView;
+    private final TextView mSet0View;
+    private final TextView mSet1View;
+    private final TextView mSet2View;
     private final TextView mMeNameView;
     private final TextView mThemNameView;
 
@@ -58,13 +61,17 @@ public class ScoreView extends FrameLayout {
 
         mMeGameView = (TextView) findViewById(R.id.MeGame);
         mThemGameView = (TextView) findViewById(R.id.ThemGame);
-        mSetsView = (TextView) findViewById(R.id.Sets);
+        mSet0View = (TextView) findViewById(R.id.Set0);
+        mSet1View = (TextView) findViewById(R.id.Set1);
+        mSet2View = (TextView) findViewById(R.id.Set2);
         mMeNameView = (TextView) findViewById(R.id.MeName);
         mThemNameView = (TextView) findViewById(R.id.ThemName);
 
         mMeGameView.setText("0");
         mThemGameView.setText("0");
-        mSetsView.setText("0 - 0\n0 - 0\n0 - 0");
+        mSet0View.setText("0 - 0");
+        mSet1View.setText("0 - 0");
+        mSet2View.setText("0 - 0");
         mMeNameView.setText(context.getResources().getString(R.string.me_name));
         mThemNameView.setText(context.getResources().getString(R.string.them_name));
     }
@@ -78,19 +85,41 @@ public class ScoreView extends FrameLayout {
     
     public void setMeGame(String score) {
     	mMeGameView.setText(score);
-    	
     	updateText();
     }
     
     public void setThemGame(String score) {
     	mThemGameView.setText(score);
-    	
     	updateText();
     }
     
-    public void setSets(String score) {
-    	mSetsView.setText(score);
-    	
+    public void setSet0(String score) {
+    	mSet0View.setText(score);
+    	updateText();
+    }
+    
+    public void setSet0Winner(int winner) {
+    	mSet0View.setTextColor(winner == 0 ? Color.parseColor("#99CC33") : Color.parseColor("#CC3333"));
+    	updateText();
+    }
+    
+    public void setSet1(String score) {
+    	mSet1View.setText(score);
+    	updateText();
+    }
+    
+    public void setSet1Winner(int winner) {
+    	mSet1View.setTextColor(winner == 0 ? Color.parseColor("#99CC33") : Color.parseColor("#CC3333"));
+    	updateText();
+    }
+    
+    public void setSet2(String score) {
+    	mSet2View.setText(score);
+    	updateText();
+    }
+    
+    public void setSet2Winner(int winner) {
+    	mSet2View.setTextColor(winner == 0 ? Color.parseColor("#99CC33") : Color.parseColor("#CC3333"));
     	updateText();
     }
 

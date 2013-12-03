@@ -90,7 +90,27 @@ public class ScoreRenderer implements SurfaceHolder.Callback {
     	mView.setThemGame(score);
     }
     
-    public void setSets(String score) {
-    	mView.setSets(score);
+    public void setSet0(String score) {
+    	mView.setSet0(score);
+    }
+    
+    public void setSet0Winner(int winner) {
+    	mView.setSet0Winner(winner);
+    }
+    
+    public void setSet1(String score) {
+    	mView.setSet1(score);
+    }
+    
+    public void setSet1Winner(int winner) {
+    	mView.setSet1Winner(winner);
+    }
+    
+    public void setSet2(String score) {
+    	mView.setSet2(score);
+    }
+    
+    public void setSet2Winner(int winner) {
+    	mView.setSet2Winner(winner);
     }
 }
