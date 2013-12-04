@@ -185,6 +185,8 @@ public class GlennisService extends Service {
     			status = "tied";
     		}
     		
+    		// TODO: Add "You've won this set" message in place of game count
+    		
     		message += " You're " + status + " " + ME_SETS[SET] + " game" + (ME_SETS[SET] == 1 ? "" : "s") + " to " + THEM_SETS[SET] + ".";
     		
     		if(GAME % 2 != 0) {
