@@ -40,6 +40,7 @@ public class GlennisService extends Service {
     private static int ME_MATCH = 0;
     private static int THEM_MATCH = 0;
     private static int SET = 0;
+    private static int GAME = 0;
     private static boolean ACTIVE = true;
 
     /**
@@ -168,6 +169,8 @@ public class GlennisService extends Service {
     		String status = null;
     		String message = null;
     		
+    		GAME++;
+    		
     		if(ME_GAME > THEM_GAME) {
     			message = "Congratulations on your win!";
     		} else {
@@ -184,7 +187,7 @@ public class GlennisService extends Service {
     		
     		message += " You're " + status + " " + ME_SETS[SET] + " game" + (ME_SETS[SET] == 1 ? "" : "s") + " to " + THEM_SETS[SET] + ".";
     		
-    		if((ME_SETS[SET] + THEM_SETS[SET]) % 2 != 0) {
+    		if(GAME % 2 != 0) {
     			message += " Switch sides.";
     		}
     		
