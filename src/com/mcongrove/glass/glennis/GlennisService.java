@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.android.glass.sample.compass;
+package com.mcongrove.glass.glennis;
 
 import android.app.PendingIntent;
 import android.app.Service;

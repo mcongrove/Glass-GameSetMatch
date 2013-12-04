@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2013 The Android Open Source Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.google.android.glass.sample.compass"
+    package="com.mcongrove.glass.glennis"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -29,21 +14,21 @@
         android:label="@string/app_name" >
 
         <activity
-            android:name="com.google.android.glass.sample.compass.MenuActivity"
+            android:name="com.mcongrove.glass.glennis.MenuActivity"
             android:label="@string/app_name"
             android:theme="@style/MenuTheme"
             android:enabled="true" >
         </activity>
 
         <activity
-            android:name="com.google.android.glass.sample.compass.EndMenuActivity"
+            android:name="com.mcongrove.glass.glennis.EndMenuActivity"
             android:label="@string/app_name"
             android:theme="@style/MenuTheme"
             android:enabled="true" >
         </activity>
 
         <service
-            android:name="com.google.android.glass.sample.compass.GlennisService"
+            android:name="com.mcongrove.glass.glennis.GlennisService"
             android:icon="@drawable/ic_tennis"
             android:label="@string/app_name"
             android:enabled="true"
