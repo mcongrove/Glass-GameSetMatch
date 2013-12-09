@@ -40,7 +40,6 @@ public class GlennisService extends Service {
     private static int ME_MATCH = 0;
     private static int THEM_MATCH = 0;
     private static int SET = 0;
-    private static int GAME = 0;
     private static boolean ACTIVE = true;
 
     /**
@@ -100,11 +99,22 @@ public class GlennisService extends Service {
     			mScoreRenderer.setMeGame(convertToTennisScore(ME_GAME));
     			mScoreRenderer.setThemGame(convertToTennisScore(THEM_GAME));
     		}
-    		
-    		calculateSet();
     	}
     	
-    	public void calculateSet() {
+    	public void endGame() {
+    		String status = "";
+    		String message = "";
+    		int difference = ME_SETS[SET] - THEM_SETS[SET];
+
+    		mScoreRenderer.setMeGame("0");
+			mScoreRenderer.setThemGame("0");
+    		
+    		if(ME_GAME > THEM_GAME) {
+    			message = "Congratulations on your win!";
+    		} else {
+    			message = "Sorry, you've lost this game.";
+    		}
+    		
     		switch(SET) {
 				case 0:
 					mScoreRenderer.setSet0(ME_SETS[0] + " - " + THEM_SETS[0]);
@@ -114,9 +124,31 @@ public class GlennisService extends Service {
 					mScoreRenderer.setSet2(ME_SETS[2] + " - " + THEM_SETS[2]);
 			}
     		
-    		if(ME_SETS[SET] >= 6 || THEM_SETS[SET] >= 6) {
-    			int difference = ME_SETS[SET] - THEM_SETS[SET];
+    		if((ME_SETS[SET] >= 6 || THEM_SETS[SET] >= 6) && (difference >= 2 || difference <= -2)) {
+    			if(ME_SETS[SET] > THEM_SETS[SET]) {
+        			status = "won";
+        		} else if(THEM_SETS[SET] > ME_SETS[SET]) {
+        			status = "lost";
+        		}
     			
+    			message += " You " + status + " this set " + ME_SETS[SET] + " games to " + THEM_SETS[SET] + ".";
+    		} else {
+    			if(ME_SETS[SET] > THEM_SETS[SET]) {
+        			status = "winning";
+        		} else if(THEM_SETS[SET] > ME_SETS[SET]) {
+        			status = "losing";
+        		} else {
+        			status = "tied";
+        		}
+    			
+	    		message += " You're " + status + " " + ME_SETS[SET] + " game" + (ME_SETS[SET] == 1 ? "" : "s") + " to " + THEM_SETS[SET] + ".";
+    		}
+    		
+    		if((ME_SETS[SET] + THEM_SETS[SET]) % 2 != 0) {
+    			message += " Switch sides.";
+    		}
+    		
+    		if(ME_SETS[SET] >= 6 || THEM_SETS[SET] >= 6) {
     			if(difference >= 2 || difference <= -2) {
     				int winner;
     				
@@ -145,8 +177,8 @@ public class GlennisService extends Service {
     				SET++;
     				
     				if(SET == 3) {
-    					String message = "";
-    					String status = "";
+    					status = "";
+    					message = "";
     					
     					if(ME_MATCH > THEM_MATCH) {
     						status = "won";
@@ -157,49 +189,15 @@ public class GlennisService extends Service {
     					message += "Game, set, match.";
     					message += "You " + status + " " + ME_MATCH + " to " + THEM_MATCH + ".";
     					
-    					tts(message);
-    					
     					endAll();
     				}
     			}
-    		}
-    	}
-    	
-    	public void endGame() {
-    		String status = null;
-    		String message = null;
-    		
-    		GAME++;
-    		
-    		if(ME_GAME > THEM_GAME) {
-    			message = "Congratulations on your win!";
-    		} else {
-    			message = "Sorry, you've lost this game.";
-    		}
-    		
-    		if(ME_SETS[SET] > THEM_SETS[SET]) {
-    			status = "winning";
-    		} else if(THEM_SETS[SET] > ME_SETS[SET]) {
-    			status = "losing";
-    		} else {
-    			status = "tied";
-    		}
-    		
-    		// TODO: Add "You've won this set" message in place of game count
-    		
-    		message += " You're " + status + " " + ME_SETS[SET] + " game" + (ME_SETS[SET] == 1 ? "" : "s") + " to " + THEM_SETS[SET] + ".";
-    		
-    		if(GAME % 2 != 0) {
-    			message += " Switch sides.";
     		}
     		
     		tts(message);
     		
     		ME_GAME = 0;
     		THEM_GAME = 0;
-    		
-    		mScoreRenderer.setMeGame("0");
-			mScoreRenderer.setThemGame("0");
     	}
     	
     	public void endAll() {
