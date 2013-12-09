@@ -31,7 +31,7 @@ import com.google.android.glass.timeline.TimelineManager;
  */
 public class GlennisService extends Service {
 
-    private static final String LIVE_CARD_ID = "timer";
+    private static final String LIVE_CARD_ID = "glennis";
     
     private static int ME_GAME = 0;
     private static int THEM_GAME = 0;
